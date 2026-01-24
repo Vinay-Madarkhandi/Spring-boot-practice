@@ -1,5 +1,5 @@
 package com.example.demo.controller;
 
 public interface TodoService {
-    public String doSomething();
+    public Todo createTodo(Todo todo);
 }

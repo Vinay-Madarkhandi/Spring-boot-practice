@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.AOP;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class TimeTellerAspect {
-    @Around("@annotation(TimeTeller)")
+    @Around("@annotation(com.example.demo.AOP.TimeTeller)")
     public void calculateExecutionTime(ProceedingJoinPoint joinPoint){
         long start = System.currentTimeMillis();
 

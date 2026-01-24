@@ -18,30 +18,23 @@ public class TodoController {
 
     private TodoService todoService;
 
-    private TodoService todoService2;
 
     public TodoController(
-            @Qualifier("fakeTodoService") TodoService todoService,
-            @Qualifier("anotherTodoService") TodoService todoService2
+            @Qualifier("anotherTodoService") TodoService todoService
             ) {
         this.todoService = todoService;
-        this.todoService2 = todoService2;
-        todoList.add(new Todo(1, true, "Wake up" , 1));
-        todoList.add(new Todo(2, false, "Boil egg" , 2));
 
     }
 
     @GetMapping("/todos")
     public ResponseEntity<List<Todo>> getAllTodos(){
-        log.info(todoService.doSomething());
-        log.info(todoService2.doSomething());
         return ResponseEntity.ok(todoList);
     }
 
     @PostMapping("/todos")
     public ResponseEntity<Todo> addTodo(@RequestBody Todo newTodo){
-        todoList.add(newTodo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newTodo);
+        Todo todo = todoService.createTodo(newTodo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(todo);
     }
 
     @GetMapping("/todos/{id}")
